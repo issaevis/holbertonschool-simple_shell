@@ -1,35 +1,39 @@
 #include "main.h"
 /**
- * command_path - function
- * @cmd: char
- * Return: NULL
+ * command_path - Function that finds the path from environ
+ *
+ * @cmd: the command
+ *
+ * Return: Returns a full path
  */
 char *command_path(char *cmd)
 {
+	char *path = strdup(_getenv("PATH"));
+	char *token = strtok(path, ":");
+	char *path_array[200];
+	char *new_path = NULL;
+	struct stat buf;
 	int i = 0;
-	char *path = strdup(_getenv("PATH")), *new_path = NULL, *token, *a_path[100];
-	struct stat buffer;
 
 	new_path = malloc(sizeof(char) * 100);
-	if (_getenv("PATH")[0] == ':')
-	{
-	if (stat(cmd, &buffer) == 0)
-		return (strdup(cmd));/*Copy the words into the array*/
-	token = strtok(path, ":");
+	if (path == NULL)
+		if (stat(cmd, &buf) == 0)
+			return (strdup(cmd));
 	while (token != NULL)
 	{
-	a_path[i] = token;
-	i++;
-	token = strtok(NULL, ":");
+		path_array[i] = token;
+		i++;
+		token = strtok(NULL, ":");
 	}
-	a_path[i] = NULL;/*Ends the array_path*/
-	for (i = 0; a_path[i]; i++;
+	path_array[i] = NULL;
+
+	for (i = 0; path_array[i]; i++)
 	{
-		strcpy(new_path, a_path[i]);
+		strcpy(new_path, path_array[i]);
 		strcat(new_path, "/");
 		strcat(new_path, cmd);
 		strcat(new_path, "\0");
-		if (stat(new_path, &buffer) == 0)
+		if (stat(new_path, &buf) == 0)
 		{
 			free(path);
 			return (new_path);
@@ -39,7 +43,7 @@ char *command_path(char *cmd)
 	}
 	free(path);
 	free(new_path);
-	if (stat(cmd, &buffer) == 0)
+	if (stat(cmd, &buf) == 0)
 		return (strdup(cmd));
 	return (NULL);
 }

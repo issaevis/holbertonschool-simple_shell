@@ -10,7 +10,7 @@
 #include <sys/wait.h>
 
 extern char **environ;
-extern char *name;
+char *name;
 
 /* The prototypes of the string functions */
 int _strlen(char *s);

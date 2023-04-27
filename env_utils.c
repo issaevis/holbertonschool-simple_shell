@@ -1,6 +1,7 @@
 #include "main.h"
 /**
  * _printenv - print env
+ *
  * Return: Value zero.
  */
 
@@ -11,8 +12,8 @@ int _printenv(void)
 
 	while (curr[i] != NULL)
 	{
-		write(STDOUT_FILENO, curr[i], strlen(curr[i]));
-		write(STDOUT_FILENO, "\n", 1);
+		write(1, curr[i], sizeof(char) * strlen(curr[i]));
+		write(1, "\n", 1);
 		i++;
 	}
 
@@ -20,7 +21,9 @@ int _printenv(void)
 }
 /**
  * _getenv - getting env
+ *
  * @name: parameter name
+ *
  * Return: NULL
  */
 char *_getenv(char *name)
