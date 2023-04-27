@@ -1,4 +1,12 @@
 #include "main.h"
+/**
+ * main - Entry point
+ *
+ * @argc: argument count
+ * @argv: argument values
+ *
+ * Return: Always 0 (Success)
+ */
 
 int main (int __attribute__((unused)) argc, char *argv[])
 {
@@ -31,11 +39,20 @@ int main (int __attribute__((unused)) argc, char *argv[])
 		if (checker == 2)
 			break;
 		else if (checker == 1)
-			return (0);
+			return (2);
 	}
 	free(line);
 	return (0);
 }
+
+/**
+ * command_read - function that reads commands
+ *
+ * @s: command
+ * @characters: characters of the command
+ *
+ * Return: return value
+ */
 
 int command_read(char *s, size_t __attribute__((unused)) characters)
 {
@@ -66,6 +83,14 @@ int command_read(char *s, size_t __attribute__((unused)) characters)
 	}
 	return (execute(path_array));
 }
+
+/**
+ * execute - function to execute a command
+ *
+ * @cmd_array: array that contains the command
+ *
+ * Return: return value 0
+ */
 
 int execute(char *cmd_array[])
 {
