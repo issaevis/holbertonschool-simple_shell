@@ -1,6 +1,8 @@
 #include "main.h"
-
-extern char **environ;
+/**
+ * _printenv - print env
+ * Return: Value zero.
+ */
 
 int _printenv(void)
 {
@@ -16,7 +18,11 @@ int _printenv(void)
 
 	return (0);
 }
-
+/**
+ * _getenv - getting env
+ * @name: parameter name
+ * Return: NULL
+ */
 char *_getenv(char *name)
 {
 	int len = strlen(name);

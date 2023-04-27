@@ -119,6 +119,6 @@ int execute(char *cmd_array[])
 	else 
 		wait(&status);
 
-free(execute_path);
-return (0);
+	free(execute_path);
+	return (0);
 }
