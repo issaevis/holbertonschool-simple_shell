@@ -4,9 +4,10 @@ int main (int __attribute__((unused)) argc, char *argv[])
 {
     char *line = NULL;
     int checker; 
-    ssize_t linecap = 0, linelen = 0;
+    ssize_t linelen = 0;
+	size_t linecap = 0;
 
-    char* name = argv[0];
+    name = argv[0];
 
     while (1)
     {
@@ -23,13 +24,13 @@ int main (int __attribute__((unused)) argc, char *argv[])
 
         if (linelen == -1)
         {
-            // Handle EOF
+            /* Handle EOF */
             if (feof(stdin))
             {
                 printf("\n");
                 break;
             }
-            // Handle error
+            /* Handle error */
             perror("getline");
             exit(-1);
         }
@@ -47,7 +48,7 @@ int main (int __attribute__((unused)) argc, char *argv[])
     return (0);
 }
 
-int command_read(char *s, size_t characters)
+int command_read(char *s, size_t __attribute__((unused)) characters)
 {
     char *token = NULL;
     char *path_array[100];
@@ -83,7 +84,7 @@ int execute(char *cmd_array[])
 
     if (execute_path == NULL)
     {
-        write(2, _strcat(cmd, ": Not found\n"), _strlen(cmd) + 12);
+        write(2, strcat(cmd, ": Not found\n"), strlen(cmd) + 12);
 		return (3);
         /*
         write(2, name, strlen(name));        
