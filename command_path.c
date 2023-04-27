@@ -10,7 +10,7 @@ char *command_path(char *cmd)
 {
 	char *path = strdup(_getenv("PATH"));
 	char *token = strtok(path, ":");
-	char *path_array[100];
+	char *path_array[200];
 	char *new_path = NULL;
 	struct stat buf;
 	int i = 0;

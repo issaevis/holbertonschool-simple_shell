@@ -2,49 +2,39 @@
 
 int main (int __attribute__((unused)) argc, char *argv[])
 {
-char *line = NULL;
-int checker; 
-ssize_t linelen = 0;
+	char *line = NULL;
+	int checker; 
+	ssize_t linelen = 0;
 	size_t linecap = 0;
 
-name = argv[0];
+	name = argv[0];
 
-while (1)
-{
-printf("$ ");
+	while (1)
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			printf("$ ");
+		linelen = getline(&line, &linecap, stdin);
 
-line = malloc(linecap * sizeof(char));
-if (line == NULL)
-{
-perror("Failed to allocate memory");
-exit (-1);
-}
+		if (linelen == -1)
+		{
+			if (isatty(STDIN_FILENO) == 1)
+				printf("\n");
+			break;
+		}
 
-linelen = getline(&line, &linecap, stdin);
+		if (linelen > 0 && line[linelen -1] == '\n')
+			line[linelen - 1] = '\0';
+		if (*line == '\0')
+			continue;
+		checker = command_read(line, linelen);
 
-if (linelen == -1)
-{
-
-if (feof(stdin))
-{
-printf("\n");
-break;
-}
-
-perror("getline");
-exit(-1);
-}
-
-if (linelen > 0 && line[linelen -1] == '\n')
-line[linelen - 1] = '\0';
-
-checker = command_read(line, strlen(line));
-
-if (checker == 2)
-break;
-}
-free(line);
-return (0);
+		if (checker == 2)
+			break;
+		else if (checker == 1)
+			return (2);
+	}
+	free(line);
+	return (0);
 }
 
 int command_read(char *s, size_t __attribute__((unused)) characters)
