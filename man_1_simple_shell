@@ -1,0 +1,51 @@
+.TH hsh 27 "April 2023" "Simple Shell Manual"
+.SH NAME
+hsh \- a simple shell program
+.SH SYNOPSIS
+.B hsh
+.SH DESCRIPTION
+.B hsh
+is a simple shell program that allows users to run commands in the terminal. It can execute programs, display the contents of environment variables, and exit gracefully. It reads commands from standard input until an exit command is entered.
+
+.B hsh
+supports the following commands:
+
+.TP
+.B exit
+Exit the shell.
+
+.TP
+.B env
+Display the current environment variables.
+
+.TP
+.B any_command
+Execute a command specified by the user. If the command is not found in the system's PATH, an error message is displayed.
+
+.SH RETURN VALUE
+.B hsh
+returns 0 on successful execution.
+
+.SH EXAMPLES
+To run the shell, simply execute the program:
+
+.nf
+$ ./hsh
+$
+
+To execute a command, enter the command at the prompt:
+
+.nf
+$ echo "Hello, World!"
+Hello, World!
+$
+
+.SH AUTHOR
+Written by Klajdi Dhana, Patrik Shalsi, Akil Kabellari and Evis Topollaj
+
+.SH SEE ALSO
+.BR bash (1),
+.BR sh (1),
+.BR ksh (1),
+.BR zsh (1).
+
