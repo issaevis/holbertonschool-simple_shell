@@ -31,7 +31,7 @@ int main (int __attribute__((unused)) argc, char *argv[])
 		if (checker == 2)
 			break;
 		else if (checker == 1)
-			return (2);
+			return (0);
 	}
 	free(line);
 	return (0);
