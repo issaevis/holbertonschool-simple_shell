@@ -8,10 +8,10 @@
  * Return: Always 0 (Success)
  */
 
-int main (int __attribute__((unused)) argc, char *argv[])
+int main(int __attribute__((unused)) argc, char *argv[])
 {
 	char *line = NULL;
-	int checker; 
+	int checker;
 	ssize_t linelen = 0;
 	size_t linecap = 0;
 
@@ -30,7 +30,7 @@ int main (int __attribute__((unused)) argc, char *argv[])
 			break;
 		}
 
-		if (linelen > 0 && line[linelen -1] == '\n')
+		if (linelen > 0 && line[linelen - 1] == '\n')
 			line[linelen - 1] = '\0';
 		if (*line == '\0')
 			continue;
@@ -95,30 +95,27 @@ int command_read(char *s, size_t __attribute__((unused)) characters)
 int execute(char *cmd_array[])
 {
 	pid_t pid;
-	char *execute_path = NULL;
-	char *cmd = NULL;
+	char *execute_path = NULL, *cmd = NULL;
 	int status;
 
 	cmd = cmd_array[0];
 	execute_path = command_path(cmd);
-
 	if (execute_path == NULL)
 	{
-        write(2, name, strlen(name));        
-        write(2, ": 1: \n", 5);
-        write(2, cmd, strlen(cmd));
-        write(2, ": not found\n", 12);
-	free(execute_path);
-	free(cmd);
-        exit (127);
-    }
-
+		write(2, name, strlen(name));
+		write(2, ": 1: \n", 5);
+		write(2, cmd, strlen(cmd));
+		write(2, ": not found\n", 12);
+		free(execute_path);
+		free(cmd);
+		exit(127);
+	}
 	pid = fork();
 
 	if (pid < 0)
 	{
-        perror("Failed to create a child proccess");
-        exit(-1);
+		perror("Failed to create a child proccess");
+		exit(-1);
 	}
 	else if (pid == 0)
 	{
@@ -131,9 +128,8 @@ int execute(char *cmd_array[])
 		else
 			execve(execute_path, cmd_array, NULL);
 	}
-	else 
+	else
 		wait(&status);
-
 	free(execute_path);
 	return (0);
 }
