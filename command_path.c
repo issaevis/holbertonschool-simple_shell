@@ -8,7 +8,7 @@
  */
 char *command_path(char *cmd)
 {
-	char *path = _strdup(_getenv("PATH"));
+	char *path = strdup(_getenv("PATH"));
 	char *token = strtok(path, ":");
 	char *path_array[100];
 	char *new_path = NULL;
@@ -18,7 +18,7 @@ char *command_path(char *cmd)
 	new_path = malloc(sizeof(char) * 100);
 	if (path == NULL)
 		if (stat(cmd, &buf) == 0)
-			return (_strdup(cmd));
+			return (strdup(cmd));
 	while (token != NULL)
 	{
 		path_array[i] = token;
@@ -29,10 +29,10 @@ char *command_path(char *cmd)
 
 	for (i = 0; path_array[i]; i++)
 	{
-		_strcpy(new_path, path_array[i]);
-		_strcat(new_path, "/");
-		_strcat(new_path, cmd);
-		_strcat(new_path, "\0");
+		strcpy(new_path, path_array[i]);
+		strcat(new_path, "/");
+		strcat(new_path, cmd);
+		strcat(new_path, "\0");
 		if (stat(new_path, &buf) == 0)
 		{
 			free(path);
@@ -44,6 +44,6 @@ char *command_path(char *cmd)
 	free(path);
 	free(new_path);
 	if (stat(cmd, &buf) == 0)
-		return (_strdup(cmd));
+		return (strdup(cmd));
 	return (NULL);
 }
